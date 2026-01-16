@@ -5,16 +5,34 @@ public class Taxi_158B {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int sum=0;
+        int[] groupsFreq = new int[5];
         for(int i=0;i<n;i++){
-            sum+=sc.nextInt();
+            int group = sc.nextInt();
+            groupsFreq[group]++;
         }
-        int carCount=0;
-        int i=1;
-        while(carCount<sum){
-            carCount=i*4;
-            i++;
+
+        int taxi =0;
+        taxi+=groupsFreq[4];
+        if(groupsFreq[3]>0 && groupsFreq[1]>0 && groupsFreq[1]<=groupsFreq[3]){
+            taxi+=groupsFreq[1];
+            taxi+=groupsFreq[3]-groupsFreq[1];
+            groupsFreq[1]=0;
+        } else if (groupsFreq[3]>0 && groupsFreq[1]>0 && groupsFreq[1]>groupsFreq[3]) {
+            taxi+=groupsFreq[3];
+            groupsFreq[1]=groupsFreq[1]-groupsFreq[3];
+        }else {
+            taxi+=groupsFreq[3];
         }
-        System.out.println(carCount/4);
+
+
+        if((groupsFreq[1]+(groupsFreq[2]*2))/4 > 0){
+            taxi+=(groupsFreq[1]+(groupsFreq[2]*2))/4;
+        }
+        if((groupsFreq[1]+(groupsFreq[2]*2))%4 > 0){
+            taxi++;
+        }
+
+
+        System.out.println("Total Taxis: "+ taxi);
     }
 }
