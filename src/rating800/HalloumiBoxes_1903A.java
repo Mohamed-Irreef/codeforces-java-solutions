@@ -1,4 +1,6 @@
 package src.rating800;
+
+
 import java.util.Scanner;
 public class HalloumiBoxes_1903A {
     public static boolean isSort(int[] array){//Ascending Sort
