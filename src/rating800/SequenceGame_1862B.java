@@ -1,49 +1,40 @@
 package src.rating800;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class SequenceGame_1862B {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
-        int[][] results = new int[t][];
-        int idx = 0;
+        List<ArrayList<Integer>> results = new ArrayList<>();
         while(t-->0){
             int n = sc.nextInt();
-            int track = 0;
-
-            int[] b = new int[n];
-            int breakPoints = 0;
+            ArrayList<Integer> b = new ArrayList<>();
+            ArrayList<Integer> a = new ArrayList<>();
             for(int i = 0; i < n; i++){
-                b[i] = sc.nextInt();
-                if(i>=1 && b[i-1]>b[i]){
-                    breakPoints++;
-                }
+               b.add(sc.nextInt());
             }
-            int[] a = new int[n+breakPoints];
-            a[track++] = b[0];
-            for(int j = 1; j < n; j++){
-
-                if(b[j-1] <= b[j]){
-                    a[track++] = b[j];
+            a.add(b.getFirst());
+            for(int j = 1; j < b.size(); j++){
+                if(b.get(j-1)<=b.get(j)){
+                    a.add(b.get(j));
                 }else {
-                   if(b[j]-1!=0){
-                       a[track++] = b[j]-1;
-                   }else {
-                       a[track++] = b[j];
-                   }
-                    a[track++] = b[j];
+                    a.add(b.get(j));
+                    a.add(b.get(j));
                 }
             }
-            results[idx++] = a;
+           results.add(a);
         }
 
-        for(int[] arr : results){
-            System.out.println(arr.length);
-            for(int num : arr){
-
-                System.out.print(num+" ");
+        for(ArrayList<Integer> list : results){
+            System.out.println(list.size());
+            for (Integer l : list){
+                System.out.print(l+" ");
             }
             System.out.println();
         }
+
+        sc.close();
     }
 }
